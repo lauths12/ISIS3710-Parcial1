@@ -1,0 +1,65 @@
+.robot-list-container {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.robot-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.robot-table th,
+.robot-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.table-header {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+}
+
+.robot-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.robot-table td:nth-child(2) {
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}
+
+.shadow-lg {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+}
+
+.contact-info {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.robot-detail-image {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+.robot-table thead th {
+  background-color: #333a40;
+  color: white;
+}

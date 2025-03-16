@@ -1,0 +1,24 @@
+{
+    "main-title": "Adopt a Robot with Robot Lovers!",
+    "main-contact": "Contact us: ",
+  
+    "auth-title": "Login",
+    "auth-user": "Username",
+    "auth-password": "Password",
+    "auth-log-in": "Login",
+    "auth-cancel": "Cancel",
+    "auth-error": "Authentication error. Check your credentials.",
+  
+    "robots-list-title": "Robot List",
+    "robots-id": "ID",
+    "robots-name": "Name",
+    "robots-model": "Model",
+    "robots-manufacturer": "Manufacturer",
+    "robots-details": "Details",
+    "robots-view-details": "View Details",
+  
+    "robots-year": "→ Year of Manufacture",
+    "robots-processing": "→ Processing Capacity",
+    "robots-humor": "→ Mood"
+  }
+  

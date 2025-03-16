@@ -1,0 +1,24 @@
+{
+    "main-title": "Adopta un Robot con Robot Lovers!",
+    "main-contact": "Contáctanos: ",
+  
+    "auth-title": "Inicio de Sesión",
+    "auth-user": "Nombre de usuario",
+    "auth-password": "Contraseña",
+    "auth-log-in": "Ingresar",
+    "auth-cancel": "Cancelar",
+    "auth-error": "Error de autenticación. Revise sus credenciales",
+  
+    "robots-list-title": "Listado de robots",
+    "robots-id": "ID",
+    "robots-name": "Nombre",
+    "robots-model": "Modelo",
+    "robots-manufacturer": "Empresa Fabricante",
+    "robots-details": "Detalles",
+    "robots-view-details": "Ver Detalles",
+  
+    "robots-year": "→ Año de Fabricación",
+    "robots-processing": "→ Capacidad de Procesamiento",
+    "robots-humor": "→ Humor"
+  }
+  

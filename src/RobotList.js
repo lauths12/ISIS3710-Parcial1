@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, Container, Button, Row, Col, Card } from "react-bootstrap";
-import RobotDetail from "./RobotDetail";
+import { Table, Container, Image, Row, Col } from "react-bootstrap";
+import { FormattedMessage } from "react-intl";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./RobotList.css";
+import RobotDetail from "./RobotDetail";
 
 function RobotList() {
   const [robots, setRobots] = useState([]);
@@ -12,7 +14,7 @@ function RobotList() {
     fetch("http://localhost:3001/robots")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al intentar obtener los robots");
+          throw new Error("Error al obtener los robots");
         }
         return response.json();
       })
@@ -21,35 +23,47 @@ function RobotList() {
   }, []);
 
   return (
-    <Container className="text-center p-4">
-      <h1 style={{ fontWeight: "bold", marginBottom: "20px" }}>Adopta un Robot con Robot Lovers!</h1>
+    <Container className="robot-list-container">
+      <h1 className="main-title">
+        <FormattedMessage id="main-title" />
+      </h1>
+      <Image src="header_robots.png" alt="Robots" className="header-image" />
 
       <Row>
         <Col md={selectedRobot ? 8 : 12}>
-          <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>Listado de robots</h2>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          <Table striped bordered hover>
+          <Table striped bordered hover className="robot-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Modelo</th>
-                <th>Empresa Fabricante</th>
-                <th>Detalles</th>
+                <th className="table-header">
+                  <FormattedMessage id="robots-id" />
+                </th>
+                <th className="table-header">
+                  <FormattedMessage id="robots-name" />
+                </th>
+                <th className="table-header">
+                  <FormattedMessage id="robots-model" />
+                </th>
+                <th className="table-header">
+                  <FormattedMessage id="robots-manufacturer" />
+                </th>
               </tr>
             </thead>
             <tbody>
               {robots.map((robot) => (
                 <tr key={robot.id}>
                   <td>{robot.id}</td>
-                  <td>{robot.nombre}</td>
+                  <td
+                    onClick={() => setSelectedRobot(robot)}
+                    style={{
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                      color: "blue",
+                    }}
+                  >
+                    {robot.nombre}
+                  </td>
                   <td>{robot.modelo}</td>
                   <td>{robot.empresaFabricante}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => setSelectedRobot(robot)}>
-                      Ver Detalles
-                    </Button>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -58,19 +72,12 @@ function RobotList() {
 
         {selectedRobot && (
           <Col md={4}>
-            <Card className="shadow-lg border-primary">
-              <Card.Body>
-                <Button variant="danger" size="sm" onClick={() => setSelectedRobot(null)}>
-                  ✖ Cerrar
-                </Button>
-                <RobotDetail robot={selectedRobot} />
-              </Card.Body>
-            </Card>
+            <RobotDetail robot={selectedRobot} />
           </Col>
         )}
       </Row>
 
-      <p style={{ marginTop: "20px", fontSize: "14px", color: "#555" }}>
+      <p className="contact-info">
         Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
       </p>
     </Container>

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./LoginForm.css";
 
 function LoginForm() {
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
   const clickSubmit = async () => {
@@ -31,52 +34,77 @@ function LoginForm() {
         setErrorMessage("");
         navigate("/robots", { state: { token: data.token } });
       } else {
-        setErrorMessage("Error de autenticación");
+        setErrorMessage(intl.formatMessage({ id: "auth-error" }));
       }
     } catch (error) {
-      setErrorMessage("Error conectando con el backend: " + error.message);
+      setErrorMessage(
+        `${intl.formatMessage({ id: "auth-error" })}: ${error.message}`
+      );
     }
   };
 
   return (
-    <Container className="text-center p-4" style={{ maxWidth: "500px", margin: "auto", border: "1px solid #ccc", borderRadius: "10px", backgroundColor: "#f9f9f9" }}>
-      <h1 style={{ fontWeight: "bold", marginBottom: "20px" }}>Adopta un Robot con Robot Lovers!</h1>
-      <h2 style={{ fontWeight: "bold", marginBottom: "20px" }}>Inicio de sesión</h2>
-      <Form>
-        <Form.Group className="mb-3">
-          <Form.Label>Nombre de usuario</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Ingresa tu email"
-            name="email"
-            value={formValues.email}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
+    <>
+      <h1 className="main-title">
+        <FormattedMessage id="main-title" />
+      </h1>
+      <Image
+        src="header_robots.png"
+        alt="Robots Header"
+        className="header-image"
+      />
 
-        <Form.Group className="mb-3">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Ingresa tu contraseña"
-            name="password"
-            value={formValues.password}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      <Container className="login-container">
+        <h2 className="auth-title">
+          <FormattedMessage id="auth-title" />
+        </h2>
 
-        <Button style={{ backgroundColor: "#007bff", borderColor: "#007bff", marginRight: "10px" }} onClick={clickSubmit}>
-          Ingresar
-        </Button>
-        <Button style={{ backgroundColor: "#dc3545", borderColor: "#dc3545" }} onClick={() => alert("Cancelado")}>
-          Cancelar
-        </Button>
-      </Form>
-      <p style={{ marginTop: "20px", fontSize: "14px", color: "#555" }}>
-        Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
-      </p>
-    </Container>
+        <Form>
+          <Form.Group className="form-group">
+            <Form.Label>
+              <FormattedMessage id="auth-user" />
+            </Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={formValues.email}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          <Form.Group className="form-group">
+            <Form.Label>
+              <FormattedMessage id="auth-password" />
+            </Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          <div className="button-container">
+            <Button className="login-button" onClick={clickSubmit}>
+              <FormattedMessage id="auth-log-in" />
+            </Button>
+            <Button
+              className="cancel-button"
+              onClick={() => alert("Cancelado")}
+            >
+              <FormattedMessage id="auth-cancel" />
+            </Button>
+          </div>
+        </Form>
+
+        <p className="contact-info">
+          <FormattedMessage id="main-contact" /> +57 3102105253 -
+          info@robot-lovers.com - @robot-lovers
+        </p>
+      </Container>
+    </>
   );
 }
 
